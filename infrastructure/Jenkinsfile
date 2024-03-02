@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                node {
+                    git credentialsId: 'my-credentials-id', url: 'https://github.com/AbdullahMohmmed95/Devops-recap-1.git'
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                node {
+                    bat 'mvn clean install'
+                }
+            }
+        }
+
+        stage('Deploy to Server') {
+            steps {
+                node {
+                    bat 'copy target\\* D:\\Devops-pipeline'
+                }
+            }
+        }
+    }
+}
