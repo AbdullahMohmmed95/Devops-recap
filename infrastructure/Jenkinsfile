@@ -4,26 +4,41 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                node {
-                    git credentialsId: 'my-credentials-id', url: 'https://github.com/AbdullahMohmmed95/Devops-recap-1.git'
-                }
+                // Checkout source code from version control
+                git 'https://github.com/AbdullahMohmmed95/Devops-recap-1.git'
             }
         }
-
+        
         stage('Build') {
             steps {
-                node {
-                    bat 'mvn clean install'
+                // Build the Maven project
+                sh 'mvn clean package'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                // Run tests using Maven
+                sh 'mvn test'
+            }
+            post {
+                // Publish JUnit test results
+                always {
+                    junit '**/target/surefire-reports/*.xml'
                 }
             }
         }
-
-        stage('Deploy to Server') {
-            steps {
-                node {
-                    bat 'copy target\\* D:\\Devops-pipeline'
-                }
-            }
+    }
+    
+    // Post-build actions
+    post {
+        success {
+            // Notify on successful build
+            slackSend channel: '#your_slack_channel', color: 'good', message: "Build successful!"
+        }
+        failure {
+            // Notify on build failure
+            slackSend channel: '#your_slack_channel', color: 'danger', message: "Build failed!"
         }
     }
 }
