@@ -12,7 +12,11 @@ pipeline {
     }
 
     triggers {
-        // Triggering the pipeline when there is a Git push
-        pollSCM('*/1 * * * *') // polling SCM every 5 minutes, change it as per your requirement
+        // Triggering the pipeline when a webhook from Git push event is received
+        genericWebhook(
+            genericVariables: [
+                [$class: 'GenericVariable', key: 'GIT_PUSH', value: 'true']
+            ]
+        )
     }
 }
