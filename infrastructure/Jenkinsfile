@@ -13,10 +13,10 @@ pipeline {
             echo 'I will always say Hello again!'
         }
         success {
-            echo 'I will say Hello only if job is success'
+            echo 'I ppppp'
         }
         failure {
-            echo 'I will say Hello only if job is failure'
+            echo 'iiii'
         }
     }
 }
