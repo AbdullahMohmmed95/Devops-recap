@@ -1,29 +1,15 @@
 pipeline {
     agent any
     
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building...'
-                // Add your build steps here
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing...'
-                // Add your test steps here
-            }
-        }
-    }
-    
-    post {
-        always {
-            echo 'Hello World!'
-            // Add any post-build actions here
-        }
-    }
-    
     triggers {
         githubPush()
+    }
+    
+    stages {
+        stage('Say Hi DevOps') {
+            steps {
+                echo 'hi DevOps'
+            }
+        }
     }
 }
