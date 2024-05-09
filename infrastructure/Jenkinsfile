@@ -1,22 +1,12 @@
 pipeline {
     agent any
-
-    stages {
-        stage('Git Push Trigger') {
-            steps {
-                script {
-                    echo 'hi DevOps'
-                }
-            }
-        }
-    }
-
     triggers {
-        // Triggering the pipeline when a webhook from Git push event is received
-        genericWebhook(
-            genericVariables: [
-                [$class: 'GenericVariable', key: 'GIT_PUSH', value: 'true']
-            ]
-        )
+        // Replace 'genericWebhook' with a valid trigger type from the list
+        // For example, if you're using GitHub, you might want to use 'githubPush'
+        githubPush()
     }
+    stages('Test') {
+        // Define your stages here
+    }
+    // Post-build actions, if any
 }
