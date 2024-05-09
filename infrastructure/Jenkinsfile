@@ -1,12 +1,29 @@
 pipeline {
     agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+                // Add your build steps here
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                // Add your test steps here
+            }
+        }
+    }
+    
+    post {
+        always {
+            echo 'Hello World!'
+            // Add any post-build actions here
+        }
+    }
+    
     triggers {
-        // Replace 'genericWebhook' with a valid trigger type from the list
-        // For example, if you're using GitHub, you might want to use 'githubPush'
         githubPush()
     }
-    stages('Test') {
-        // Define your stages here
-    }
-    // Post-build actions, if any
 }
