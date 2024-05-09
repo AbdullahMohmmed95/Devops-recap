@@ -1,17 +1,29 @@
 pipeline {
   agent any
   stages {
-    stage('step-1') {
+    stage('Build') {
       agent any
       steps {
-        echo 'hi DevOps'
+        sh 'echo \'Building...\''
       }
     }
 
-    stage('error') {
+    stage('Testing') {
       agent any
       steps {
-        echo 'hi DevOps'
+        echo 'test'
+      }
+    }
+
+    stage('post') {
+      steps {
+        echo 'Hello World!'
+      }
+    }
+
+    stage('triggers') {
+      steps {
+        gitPush(targetBranch: 'main', targetRepo: 'Devops-recap-1')
       }
     }
 
