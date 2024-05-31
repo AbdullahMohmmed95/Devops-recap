@@ -1,4 +1,4 @@
-# Use an official Nginx base image anas
+# Use an official Nginx base image 
 FROM nginx:latest
 
 
