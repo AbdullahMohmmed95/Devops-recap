@@ -1,11 +1,10 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Hello') {
+   stages {
+        stage('Checkout') {
             steps {
-                echo 'Hello World'
+                git 'https://your-repository-url.git'
             }
         }
-    }
 }
