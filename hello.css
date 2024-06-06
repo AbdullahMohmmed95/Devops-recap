@@ -4,6 +4,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    background-color: burlywood;
 }
 
 .calculator {
@@ -35,7 +36,7 @@ button {
     border: none;
     border-radius: 3px;
     cursor: pointer;
-    background-color: #f0f0f0;
+    background-color:aquamarine;
 }
 
 button:active {
