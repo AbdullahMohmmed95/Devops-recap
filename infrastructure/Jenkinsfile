@@ -1,15 +1,48 @@
 pipeline {
     agent any
-    
-    triggers {
-        githubPush()
-    }
-    
+
     stages {
-        stage('Say Hi DevOps') {
+        stage('Checkout') {
             steps {
-                echo 'hi DevOps'
+                git 'https://github.com/AbdullahMohmmed95/Devops-recap-1.git'
             }
+        }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build('myapp_image:latest')
+                }
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                script {
+                    docker.image('node:14').inside {
+                        sh 'npm install'
+                        sh 'npm test'
+                    }
+                }
+            }
+        }
+        stage('Run Nginx Container') {
+            steps {
+                script {
+                    docker.image('myapp_image:latest').run('-p 8080:80')
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            junit '**/test-results.xml'
+            archiveArtifacts artifacts: '**/test-results.xml', allowEmptyArchive: true
+        }
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
         }
     }
 }
