@@ -10,7 +10,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build('myapp_image:latest')
+                    docker.build('devops-recap-image:latest')
                 }
             }
         }
@@ -27,7 +27,7 @@ pipeline {
         stage('Run Nginx Container') {
             steps {
                 script {
-                    docker.image('myapp_image:latest').run('-p 8080:80')
+                    docker.image('devops-recap-image:latest').run('-p 8080:80')
                 }
             }
         }
