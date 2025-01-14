@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_AbdullahMohmmed95_Devops_recap_1_1736861061419-pr-trigger-input-set
+  identifier: Build_AbdullahMohmmed95_Devops_recap_1_1736861061419prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_AbdullahMohmmed95_Devops_recap_1_1736861061419
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
